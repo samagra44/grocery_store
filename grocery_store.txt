@@ -1,0 +1,34 @@
+Traceback (most recent call last):
+  File "C:\Users\Asus\AppData\Local\Programs\Python\Python311\Lib\site-packages\mysql\connector\connection_cext.py", line 633, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'inner join uom on products.uom_id=uom.uom_id' at line 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\Asus\Desktop\grocery_store\backend\products_DAO.py", line 7, in <module>
+    cursor.execute(query)
+  File "C:\Users\Asus\AppData\Local\Programs\Python\Python311\Lib\site-packages\mysql\connector\cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+             ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Asus\AppData\Local\Programs\Python\Python311\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper    
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Asus\AppData\Local\Programs\Python\Python311\Lib\site-packages\mysql\connector\connection_cext.py", line 641, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.ProgrammingError: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'inner join uom on products.uom_id=uom.uom_id' at line 1
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SOLUTION - select products.product_id, products.name, products.uom_id, products.price_per_unit, uom.uom_name "
+         "from products inner join uom on products.uom_id=uom.uom_id"
+-----------------------------------------------------------------------------------------------------------------
+
+Traceback (most recent call last):
+  File "c:\Users\Asus\Desktop\grocery_store\backend\products_DAO.py", line 23, in <module>
+    connection = get_sql_connection()
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Asus\Desktop\grocery_store\backend\sql_connection.py", line 8, in get_sql_connection
+    return cnx
+           ^^^
+NameError: name 'cnx' is not defined
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SOLUTION - return __cnx
